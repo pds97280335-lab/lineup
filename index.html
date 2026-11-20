@@ -36,7 +36,7 @@ button.pri{background:var(--ac);color:var(--acx);border-color:var(--ac);font-wei
 .bench.swp{outline:2px solid #e0a800;border-radius:10px;padding:2px}
 .sub{width:26px;height:26px;border-radius:50%;background:#6b7a6f;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex:none}
 textarea{width:100%;min-height:150px;background:var(--inp);color:var(--tx);border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit}
-.slot{touch-action:none}.slot .dot{width:46px;height:44px;border:0;border-radius:0;font-size:12px;padding-top:6px;clip-path:polygon(25% 0,38% 9%,62% 9%,75% 0,100% 22%,86% 42%,76% 33%,76% 100%,24% 100%,24% 33%,14% 42%,0 22%)}.slot.empty .dot{border:0;background:rgba(255,255,255,.3)}.slot.sel,.slot.tgt{filter:drop-shadow(0 0 5px #ffd54a) drop-shadow(0 0 5px #ffd54a)}.slot.tgt .dot{animation:none}.sqh{display:flex;justify-content:space-between;background:#e5efe6;color:#1b3a2c;padding:6px 10px;font-size:13px;font-weight:700;margin-top:8px;border-radius:6px}.sqh.b{background:#f3ecdc}.sq{display:grid;grid-template-columns:48px 1fr 36px;padding:7px 10px;border-bottom:1px solid var(--line);font-size:14px;cursor:pointer}.sq span{color:var(--mut);font-size:12px}.sq em{font-style:normal;color:var(--mut);text-align:right;font-size:12px}.sq.on{background:rgba(31,138,76,.14)}.slot.dup .dot{border-color:#e53935;background:#ffd6d6;color:#900}table{width:100%;border-collapse:collapse;font-size:13px}td{padding:3px 4px;border-bottom:1px solid var(--line)}tr.zero td{color:#d33;font-weight:700}#chips button{margin:0 4px 4px 0;padding:6px 10px;border-radius:16px}
+.slot{touch-action:none}.slot .dot{width:46px;height:44px;border:0;border-radius:0;font-size:12px;padding-top:6px;clip-path:polygon(25% 0,38% 9%,62% 9%,75% 0,100% 22%,86% 42%,76% 33%,76% 100%,24% 100%,24% 33%,14% 42%,0 22%)}.slot.empty .dot{border:0;background:rgba(255,255,255,.3)}.slot.sel,.slot.tgt{filter:drop-shadow(0 0 5px #ffd54a) drop-shadow(0 0 5px #ffd54a)}.slot.tgt .dot{animation:none}.sqh{display:flex;justify-content:space-between;background:#e5efe6;color:#1b3a2c;padding:6px 10px;font-size:13px;font-weight:700;margin-top:8px;border-radius:6px}.sqh.b{background:#f3ecdc}.sq{display:grid;grid-template-columns:48px 1fr 36px;padding:7px 10px;border-bottom:1px solid var(--line);font-size:14px;cursor:pointer}.sq span{color:var(--mut);font-size:12px}.sq em{font-style:normal;color:var(--mut);text-align:right;font-size:12px}.sq.on{background:rgba(31,138,76,.14)}.bc{margin:0 4px 4px 0;padding:8px 12px;border-radius:18px}.bc.on{background:#e0a800;color:#000;border-color:#e0a800;font-weight:700}.pitch{width:min(100%,max(360px,calc((100vh - 340px)*68/90)));margin:0 auto}.side{display:flex;flex-direction:column;gap:12px}.side>.card:first-child{position:sticky;top:8px;z-index:2;max-height:calc(100vh - 16px);overflow:auto}.side .card{margin:0}.sq[data-b]{cursor:grab;user-select:none;touch-action:none}.ghost{position:fixed;transform:translate(-50%,-50%);background:#e0a800;color:#000;padding:6px 12px;border-radius:16px;font-weight:700;pointer-events:none;z-index:99}.slot.dup .dot{border-color:#e53935;background:#ffd6d6;color:#900}table{width:100%;border-collapse:collapse;font-size:13px}td{padding:3px 4px;border-bottom:1px solid var(--line)}tr.zero td{color:#d33;font-weight:700}#chips button{margin:0 4px 4px 0;padding:6px 10px;border-radius:16px}
 @media print{.noprint{display:none!important}}
 </style>
 </head>
@@ -47,9 +47,9 @@ textarea{width:100%;min-height:150px;background:var(--inp);color:var(--tx);borde
  <input id="team" placeholder="팀 이름" style="flex:1">
  <input id="opp" placeholder="상대팀" style="width:100px"><input id="venue" placeholder="구장" style="width:100px"><input id="date" type="date"><input id="color" type="color" title="유니폼 색" style="padding:2px;width:42px"><button id="reset">초기화</button>
 </div>
-<div class="two"><div class="side"><div class="card"><p class="lbl" style="margin:0;letter-spacing:1px">SQUAD LIST</p><b style="font-size:18px">선수 명단</b><div id="squad"></div></div>
-<div class="card noprint"><p class="lbl">🗂 지난 경기 · 공유</p><div class="row"><button class="pri" id="hsave">💾 현재 경기 저장</button><button id="hnew">➕ 새 경기</button><button id="hcode">🔗 공유 코드 만들기</button></div><p id="hmsg" class="lbl" style="margin-top:6px"></p><div id="hlist"></div><div class="row" style="margin-top:8px"><input id="code" placeholder="받은 공유 코드를 여기에 붙여넣기" style="flex:1"><button id="hload">불러오기</button></div></div>
-<div class="card noprint"><p class="lbl">👥 오늘 참석자 (이름 · 주포지션 예: CB, ST, GK)</p><div id="roster"></div><div class="row"><input id="bulk" placeholder="여러 명 한번에: 철수,영희,민수 입력 후 Enter" style="flex:1"><button id="addr">+ 1명</button></div><div class="row" style="margin-top:8px"><button class="pri" id="auto">⚡ 쿼터 자동 배분 (출전 골고루)</button><label style="font-size:13px"><input type="checkbox" id="useS"> 누적 출전 적은 선수 우선</label></div></div>
+<div class="two"><div class="side"><div class="card"><p class="lbl" style="margin:0;letter-spacing:1px">SQUAD LIST</p><b style="font-size:18px">선수 명단</b><p class="lbl" style="margin:4px 0 0">후보를 그라운드 자리로 끌어다 놓으세요 · 그라운드 선수를 이 목록으로 끌면 후보로 빠집니다</p><div id="squad"></div></div>
+<div class="card noprint" style="order:2"><p class="lbl">🗂 지난 경기 · 공유</p><div class="row"><button class="pri" id="hsave">💾 현재 경기 저장</button><button id="hnew">➕ 새 경기</button><button id="hcode">🔗 공유 코드 만들기</button></div><p id="hmsg" class="lbl" style="margin-top:6px"></p><div id="hlist"></div><div class="row" style="margin-top:8px"><input id="code" placeholder="받은 공유 코드를 여기에 붙여넣기" style="flex:1"><button id="hload">불러오기</button></div></div>
+<div class="card noprint" style="order:1"><p class="lbl">👥 오늘 참석자 (이름 · 주포지션 예: CB, ST, GK)</p><div id="roster"></div><div class="row"><textarea id="bulk" placeholder="한 줄에 한 명씩: 이름 포지션&#10;김민준 ST&#10;박지훈 LW&#10;(카톡·엑셀에서 복사해 붙여넣기 가능)" style="flex:1;min-height:100px"></textarea><button class="pri" id="addr">등록</button></div><div class="row" style="margin-top:8px"><button class="pri" id="auto">⚡ 쿼터 자동 배분 (출전 골고루)</button><label style="font-size:13px"><input type="checkbox" id="useS"> 누적 출전 적은 선수 우선</label></div></div>
 </div><div class="main"><div class="tabs" id="tabs"></div>
 <div class="card">
  <div class="row noprint" style="margin-bottom:10px">
@@ -64,7 +64,7 @@ textarea{width:100%;min-height:150px;background:var(--inp);color:var(--tx);borde
    <rect x="14" y="73" width="40" height="15"/><rect x="24" y="82" width="20" height="6"/>
   </svg>
  </div>
- <div class="noprint" id="panel" style="margin-top:10px;display:none">
+ <div id="bar" class="noprint" style="margin-top:10px"></div><div class="noprint" id="panel" style="margin-top:10px;display:none">
   <p class="lbl" id="plbl"></p>
   <div class="row">
    <input id="pn" placeholder="이름" list="names" style="flex:1">
@@ -74,7 +74,7 @@ textarea{width:100%;min-height:150px;background:var(--inp);color:var(--tx);borde
  </div>
  <div id="chips" class="noprint" style="margin-top:8px"></div><div id="warn" class="lbl" style="color:#d33;margin-top:6px"></div><div id="diff" class="lbl"></div><datalist id="names"></datalist>
 </div>
-<div class="card">
+<div class="card" style="display:none">
  <p class="lbl">🪑 후보 (⇄ 누른 뒤 교체할 그라운드 선수를 터치)</p>
  <div id="bench"></div>
  <button class="noprint" id="addb">+ 후보 추가</button>
@@ -102,7 +102,7 @@ const save=()=>{try{localStorage.setItem("lineup11",JSON.stringify(S))}catch(e){
 const Q=()=>S.q[cur];
 $("form").innerHTML=Object.keys(F).map(f=>`<option>${f}</option>`).join("");
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-function render(){
+function render(){sync();
  $("team").value=S.team;
  $("tabs").innerHTML=S.q.map((_,i)=>`<button class="tab${i==cur?" on":""}" data-i="${i}">${i+1}쿼터</button>`).join("");
  $("form").value=Q().f;
@@ -121,7 +121,7 @@ function renderPitch(){
   d.innerHTML=`<div class="dot">${esc(s.p)}</div><div class="nm">${s.n?esc(s.n):"+"}</div>`;
   let drag=false;d.onpointerdown=ev=>{const r=$('pitch').getBoundingClientRect(),x0=ev.clientX,y0=ev.clientY;let mv=false;try{d.setPointerCapture(ev.pointerId)}catch(_){}
   d.onpointermove=e=>{if(!mv&&Math.abs(e.clientX-x0)+Math.abs(e.clientY-y0)<8)return;mv=true;d.style.left=(e.clientX-r.left)+'px';d.style.top=(e.clientY-r.top)+'px';d.style.zIndex=9};
-  d.onpointerup=e=>{d.onpointermove=d.onpointerup=null;if(!mv)return;drag=true;d.style.pointerEvents='none';const t=document.elementFromPoint(e.clientX,e.clientY),o=t&&t.closest('.slot');d.style.pointerEvents='';const j=o?[...$('pitch').querySelectorAll('.slot')].indexOf(o):-1;if(j>=0&&j!==i){const a=q.s[i].n;q.s[i].n=q.s[j].n;q.s[j].n=a;save()}render()}};
+  d.onpointerup=e=>{d.onpointermove=d.onpointerup=null;if(!mv)return;drag=true;d.style.pointerEvents='none';const t=document.elementFromPoint(e.clientX,e.clientY),o=t&&t.closest('.slot');d.style.pointerEvents='';const j=o?[...$('pitch').querySelectorAll('.slot')].indexOf(o):-1;if(j>=0&&j!==i){const a=q.s[i].n;q.s[i].n=q.s[j].n;q.s[j].n=a;save()}else if(j<0&&t&&t.closest('#squad')){q.s[i].n='';save()}render()}};
   d.onclick=()=>{if(drag){drag=false;return}
    if(swp!==null){const b=q.b[swp];const t=s.n;s.n=b.n;b.n=t;swp=null;save();render();return}
    sel=i;render();
@@ -144,6 +144,7 @@ function renderRoster(){$('roster').innerHTML=S.roster.map((r,i)=>`<div class="b
 function renderMeta(){
  const q=Q(),pl=new Set([...q.s,...q.b].map(x=>x.n).filter(Boolean));
  $('chips').innerHTML=sel===null?'':'<p class="lbl">참석자 (이 경기 출전 쿼터 적은 순 · 빨강은 0쿼터) 터치하면 배치</p>'+S.roster.filter(r=>r.n&&!pl.has(r.n)).sort((a,b)=>pc(a.n)-pc(b.n)).map(r=>`<button data-n="${esc(r.n)}" style="${pc(r.n)?'':'border-color:#d33;color:#d33;font-weight:700'}">${esc(r.n)} · ${pc(r.n)}Q${r.p?' · '+esc(r.p):''}</button>`).join('');
+ $('bar').innerHTML='<p class="lbl" style="margin:0 0 4px">🪑 후보: 누른 뒤 그라운드 선수를 터치하면 교체</p>'+(q.b.some(b=>b.n)?q.b.map((b,i)=>b.n?`<button data-bi="${i}" class="bc${swp===i?' on':''}">${esc(b.n)} · ${pc(b.n)}Q</button>`:'').join(''):'<span class="lbl">후보가 없어요. 아래에서 추가하세요.</span>');
  const d=[...dups(q)];$('warn').textContent=d.length?'⚠ 중복 배치: '+d.join(', '):'';
  let t='';
  if(cur>0){const a=new Set(S.q[cur-1].s.map(x=>x.n).filter(Boolean)),b=new Set(q.s.map(x=>x.n).filter(Boolean));t=`↔ ${cur}쿼터 대비 IN: ${[...b].filter(n=>!a.has(n)).join(', ')||'-'} / OUT: ${[...a].filter(n=>!b.has(n)).join(', ')||'-'}`}
@@ -192,10 +193,22 @@ const HK='lineup11h';
 function hist(){try{return JSON.parse(localStorage.getItem(HK))||[]}catch(e){return[]}}
 function hput(a){try{localStorage.setItem(HK,JSON.stringify(a))}catch(e){}}
 function snap(){return JSON.parse(JSON.stringify(S))}
+function sync(){const seen=new Set(S.roster.map(r=>r.n));
+ S.q.forEach(q=>q.s.forEach(x=>{if(x.n&&!seen.has(x.n)){seen.add(x.n);S.roster.push({n:x.n,p:''})}}));
+ S.q.forEach(q=>{const pl=new Set(q.s.map(x=>x.n).filter(Boolean));q.b=S.roster.filter(r=>r.n&&!pl.has(r.n)).map(r=>({n:r.n,p:r.p}))})}
+$('squad').onpointerdown=e=>{const r=e.target.closest('[data-b]');if(!r||e.button)return;const k=+r.dataset.b,x0=e.clientX,y0=e.clientY;let g=null;
+ const mv=ev=>{if(!g&&Math.abs(ev.clientX-x0)+Math.abs(ev.clientY-y0)<8)return;if(!g){g=document.createElement('div');g.className='ghost';g.textContent=Q().b[k].n;document.body.appendChild(g)}g.style.left=ev.clientX+'px';g.style.top=ev.clientY+'px'};
+ const up=ev=>{removeEventListener('pointermove',mv);removeEventListener('pointerup',up);if(!g)return;g.remove();window._d=1;const t=document.elementFromPoint(ev.clientX,ev.clientY),o=t&&t.closest('.slot,[data-s]');let i=-1;if(o)i=o.classList.contains('slot')?[...$('pitch').querySelectorAll('.slot')].indexOf(o):+o.dataset.s;if(i>=0){Q().s[i].n=Q().b[k].n;save()}render()};
+ addEventListener('pointermove',mv);addEventListener('pointerup',up)};
 function hmsg(t){$('hmsg').textContent=t}
 function renderSquad(){const q=Q(),row=(p,n,i)=>`<div class="sq${i===sel?' on':''}" ${i>=0?'data-s="'+i+'"':''}><span>${esc(p||'')}</span><b>${n?esc(n):'<i style="opacity:.4;font-weight:400">비어있음</i>'}</b><em>${n?pc(n)+'Q':''}</em></div>`;
- $('squad').innerHTML=`<div class="sqh"><span>선발</span><span>${q.s.filter(x=>x.n).length}명</span></div>`+q.s.map((s,i)=>row(s.p,s.n,i)).join('')+`<div class="sqh b"><span>후보</span><span>${q.b.filter(x=>x.n).length}명</span></div>`+(q.b.map(b=>row(b.p,b.n,-1)).join('')||'<p class="lbl" style="padding:6px 10px">후보 없음</p>')}
-$('squad').onclick=e=>{const r=e.target.closest('[data-s]');if(r){sel=+r.dataset.s;swp=null;render()}};
+ $('squad').innerHTML=`<div class="sqh"><span>선발</span><span>${q.s.filter(x=>x.n).length}명</span></div>`+q.s.map((s,i)=>row(s.p,s.n,i)).join('')+`<div class="sqh b"><span>후보</span><span>${q.b.filter(x=>x.n).length}명</span></div>`+(q.b.map((b,k)=>row(b.p,b.n,-1).replace('<div class="sq','<div data-b="'+k+'" class="sq'+(swp===k?' on':''))).join('')||'<p class="lbl" style="padding:6px 10px">후보 없음</p>')}
+$('squad').onclick=e=>{if(window._d){window._d=0;return}const r=e.target.closest('[data-s],[data-b]');if(!r)return;const q=Q();
+ if(r.dataset.b!==undefined){const i=+r.dataset.b;swp=swp===i?null:i;sel=null;render();return}
+ const i=+r.dataset.s;
+ if(swp!==null){const b=q.b[swp],s=q.s[i],t=s.n;s.n=b.n;b.n=t;swp=null;save();render();return}
+ sel=i;render()};
+$('bar').onclick=e=>{const b=e.target.closest('[data-bi]');if(b){const i=+b.dataset.bi;swp=swp===i?null:i;sel=null;render()}};
 function pc(n){return S.q.filter(z=>z.s.some(x=>x.n===n)).length}
 function seasonData(ms){const t={};S.roster.forEach(r=>r.n&&(t[r.n]={q:0,g:0}));
  ms.forEach(m=>{const im=new Set();m.q.forEach(z=>z.s.forEach(x=>{if(!x.n)return;t[x.n]=t[x.n]||{q:0,g:0};t[x.n].q++;im.add(x.n)}));im.forEach(n=>t[n].g++)});return t}
@@ -213,11 +226,11 @@ $('hcode').onclick=()=>{const d=snap();delete d.hid;const c='LU1:'+btoa(unescape
 $('hload').onclick=()=>{try{const d=JSON.parse(decodeURIComponent(escape(atob($('code').value.trim().replace(/^LU1:/,'')))));if(!d.q||!d.q.length||!d.q.every(z=>F[z.f]))throw 0;S=d;S.hid=String(Date.now());norm();cur=0;sel=null;swp=null;save();render();hmsg('불러왔어요. 보관하려면 "현재 경기 저장"을 누르세요.')}catch(e){hmsg('코드를 읽을 수 없어요. 전체를 정확히 붙여넣었는지 확인하세요.')}};
 $('date').onchange=e=>{S.date=e.target.value;save()};
 $('color').oninput=e=>{S.color=e.target.value;save();render()};
-$('roster').oninput=e=>{const i=e.target.dataset.i;if(i===undefined)return;S.roster[i][e.target.classList.contains('rn')?'n':'p']=e.target.value;save()};
+$('roster').oninput=e=>{const i=e.target.dataset.i;if(i===undefined)return;const isN=e.target.classList.contains('rn'),o=S.roster[i].n;S.roster[i][isN?'n':'p']=e.target.value;if(isN&&o)S.q.forEach(q=>q.s.forEach(x=>{if(x.n===o)x.n=e.target.value}));save()};
 $('roster').onchange=()=>render();
-$('roster').onclick=e=>{const t=e.target.closest('button');if(t&&t.dataset.del!==undefined){S.roster.splice(+t.dataset.del,1);save();render()}};
-$('addr').onclick=()=>{S.roster.push({n:'',p:''});save();renderRoster()};
-$('bulk').onkeydown=e=>{if(e.key!=='Enter')return;e.target.value.split(/[,\s]+/).filter(Boolean).forEach(n=>S.roster.push({n,p:''}));e.target.value='';save();render()};
+$('roster').onclick=e=>{const t=e.target.closest('button');if(t&&t.dataset.del!==undefined){const nm=S.roster[+t.dataset.del].n;S.roster.splice(+t.dataset.del,1);S.q.forEach(q=>q.s.forEach(x=>{if(x.n===nm)x.n=''}));save();render()}};
+$('addr').onclick=()=>{let n=0;$('bulk').value.split(/\n|,/).map(s=>s.trim()).filter(Boolean).forEach(l=>{const t=l.split(/\s+/);let p='';if(t.length>1&&/^[A-Za-z]{2,3}$/.test(t[t.length-1]))p=t.pop().toUpperCase();const nm=t.join(' '),ex=S.roster.find(r=>r.n===nm);if(ex){if(p)ex.p=p}else{S.roster.push({n:nm,p});n++}});$('bulk').value='';save();render();hmsg(n+'명 등록했어요.')};
+$('bulk').onkeydown=e=>{return;e.target.value.split(/[,\s]+/).filter(Boolean).forEach(n=>S.roster.push({n,p:''}));e.target.value='';save();render()};
 $('chips').onclick=e=>{const n=e.target.dataset.n;if(!n||sel===null)return;Q().s[sel].n=n;const nx=Q().s.findIndex(s=>!s.n);sel=nx<0?null:nx;save();render()};
 $('auto').onclick=()=>{
  const R=S.roster.filter(r=>r.n);if(R.length<11){alert('참석자를 11명 이상 입력하세요.');return}
