@@ -80,7 +80,7 @@ textarea{width:100%;min-height:150px;background:var(--inp);color:var(--tx);borde
  <button class="noprint" id="addb">+ 후보 추가</button>
 </div>
 <div class="card noprint">
- <div class="row"><button class="pri" id="txt">📋 카톡용 텍스트</button><button id="img">🖼 이미지로 저장</button><button id="prt">🖨 인쇄/PDF</button></div><div id="imgbox"></div>
+ <div class="row"><button class="pri" id="txt">📋 카톡용 텍스트</button><button id="img">🖼 현재 쿼터 저장</button><button id="imgall">🖼 전 쿼터 각각 저장</button><button id="imgone">🖼 한 장으로 합쳐 저장</button><button id="prt">🖨 인쇄/PDF</button></div><div id="imgbox"></div>
  <div id="stats" style="margin-top:10px"></div><div id="season" style="margin-top:12px"></div><textarea id="out" style="display:none;margin-top:8px" readonly></textarea>
 </div></div></div>
 </div>
@@ -257,6 +257,29 @@ $('img').onclick=()=>{
   if(s.n){x.font='bold 20px sans-serif';const w=x.measureText(s.n).width+16;x.fillStyle='rgba(0,0,0,.65)';x.fillRect(cx-w/2,cy+32,w,26);x.fillStyle='#fff';x.fillText(s.n,cx,cy+52)}});
  const bn=q.b.filter(b=>b.n).map(b=>b.n).join(', ');x.fillStyle='#fff';x.font='bold 20px sans-serif';x.fillText('후보: '+(bn||'-'),W/2,992);
  $('imgbox').innerHTML='<p class="lbl">이미지를 길게 눌러(PC는 우클릭) 저장하세요</p><img src="'+c.toDataURL()+'" style="width:100%;border-radius:10px">'};
+function qCanvas(i){const q=S.q[i],W=680,H=900,Y=60,c=document.createElement('canvas');c.width=W;c.height=1040;const x=c.getContext('2d');
+ x.fillStyle='#2e9a55';x.fillRect(0,0,W,1040);
+ for(let k=0;k<10;k+=2){x.fillStyle='#2a9150';x.fillRect(0,Y+k*H/10,W,H/10)}
+ const sx=W/68,sy=H/90;x.strokeStyle='rgba(255,255,255,.8)';x.lineWidth=3;
+ x.strokeRect(2*sx,Y+2*sy,64*sx,86*sy);x.beginPath();x.moveTo(2*sx,Y+45*sy);x.lineTo(66*sx,Y+45*sy);x.stroke();
+ x.beginPath();x.arc(34*sx,Y+45*sy,7*sx,0,7);x.stroke();x.strokeRect(14*sx,Y+2*sy,40*sx,15*sy);x.strokeRect(14*sx,Y+73*sy,40*sx,15*sy);
+ x.textAlign='center';x.fillStyle='#fff';x.font='bold 24px sans-serif';
+ x.fillText((S.team||'우리팀')+(S.opp?' vs '+S.opp:'')+' · '+(i+1)+'쿼터 ('+q.f+')',W/2,32);
+ x.font='15px sans-serif';x.fillText([S.date,S.venue].filter(Boolean).join(' · '),W/2,52);
+ const P=[[.25,0],[.38,.09],[.62,.09],[.75,0],[1,.22],[.86,.42],[.76,.33],[.76,1],[.24,1],[.24,.33],[.14,.42],[0,.22]];
+ q.s.forEach((s,k)=>{const cx=F[q.f][k][1]/100*W,cy=Y+F[q.f][k][2]/100*H;
+  x.beginPath();P.forEach((p,j)=>x[j?'lineTo':'moveTo'](cx-30+p[0]*60,cy-28+p[1]*56));x.closePath();x.fillStyle=S.color;x.fill();x.lineWidth=2;x.strokeStyle='#14532d';x.stroke();
+  x.fillStyle=lum(S.color)>140?'#14532d':'#fff';x.font='bold 15px sans-serif';x.fillText(s.p,cx,cy+6);
+  if(s.n){x.font='bold 20px sans-serif';const w=x.measureText(s.n).width+16;x.fillStyle='rgba(0,0,0,.65)';x.fillRect(cx-w/2,cy+32,w,26);x.fillStyle='#fff';x.fillText(s.n,cx,cy+52)}});
+ x.font='bold 18px sans-serif';x.fillStyle='#fff';let line='후보: ',ly=984;
+ q.b.filter(b=>b.n).forEach(b=>{if(x.measureText(line+b.n).width>W-30){x.fillText(line,W/2,ly);ly+=22;line=''}line+=b.n+'   '});x.fillText(line,W/2,ly);
+ return c}
+function fname(s){return (S.team||'라인업')+(S.date?'_'+S.date:'')+'_'+s+'.png'}
+function dl(c,name){c.toBlob(b=>{const u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),3000)})}
+function prev(c){$('imgbox').innerHTML='<p class="lbl">파일이 다운로드되지 않으면 아래 이미지를 우클릭(폰은 길게 누름)해 저장하세요</p><img src="'+c.toDataURL()+'" style="width:100%;max-width:420px;border-radius:10px">'}
+$('img').onclick=()=>{sync();const c=qCanvas(cur);dl(c,fname((cur+1)+'Q'));prev(c)};
+$('imgall').onclick=()=>{sync();S.q.forEach((_,i)=>setTimeout(()=>dl(qCanvas(i),fname((i+1)+'Q')),i*500));$('imgbox').innerHTML='<p class="lbl">'+S.q.length+'장을 저장하는 중입니다. 브라우저가 "여러 파일 다운로드"를 물으면 허용하세요.</p>'};
+$('imgone').onclick=()=>{sync();const n=S.q.length,cw=510,ch=780,c=document.createElement('canvas');c.width=cw*Math.min(n,2);c.height=ch*Math.ceil(n/2);const x=c.getContext('2d');S.q.forEach((_,i)=>x.drawImage(qCanvas(i),(i%2)*cw,Math.floor(i/2)*ch,cw,ch));dl(c,fname('전체'));prev(c)};
 render();
 </script>
 </body>
